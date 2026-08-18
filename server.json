@@ -21,7 +21,7 @@
       "registryType": "mcpb",
       "identifier": "https://github.com/Netmon-Services/netmon-mcpd/releases/download/v0.1.6/netmon-mcp-0.1.6.mcpb",
       "version": "0.1.6",
-      "fileSha256": "__REPLACE_WITH_SHA256_OF_MCPB__",
+      "fileSha256": "033b75cca5d40755702471c1d7a2f1854bcbfaf02501b6f0e1b40abb61075036",
       "transport": {
         "type": "stdio"
       }
