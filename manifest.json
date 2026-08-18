@@ -1,0 +1,59 @@
+{
+  "manifest_version": "0.3",
+  "name": "netmon-mcp",
+  "display_name": "Netmon",
+  "version": "0.1.6",
+  "description": "Connect Claude to a Netmon server \u2014 query devices, alerts, syslog, NetFlow, and metrics over the MCP streamable-HTTP endpoint.",
+  "author": {
+    "name": "Netmon",
+    "url": "https://netmon.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Netmon-Services/netmon-mcpd"
+  },
+  "homepage": "https://netmon.com",
+  "icon": "icon.png",
+  "server": {
+    "type": "node",
+    "entry_point": "server/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/server/index.js"
+      ],
+      "env": {
+        "NETMON_URL": "${user_config.url}",
+        "NETMON_TOKEN": "${user_config.token}"
+      }
+    }
+  },
+  "user_config": {
+    "url": {
+      "type": "string",
+      "title": "Netmon URL",
+      "description": "Full MCP endpoint, e.g. https://netmon.example.com/mcp or https://10.10.1.25/mcp",
+      "required": true
+    },
+    "token": {
+      "type": "string",
+      "title": "API Token",
+      "description": "Personal access token (PAT) minted in Netmon under Settings \u2192 Users \u2192 key icon. The 'Bearer ' prefix is added automatically if missing.",
+      "sensitive": true,
+      "required": true
+    }
+  },
+  "privacy_policies": [
+    "https://netmon.com/privacy-policy/"
+  ],
+  "compatibility": {
+    "platforms": [
+      "darwin",
+      "win32",
+      "linux"
+    ],
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  }
+}

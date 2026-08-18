@@ -1,0 +1,37 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.netmon/netmon",
+  "title": "Netmon",
+  "description": "Query devices, alerts, syslog, NetFlow and metrics on your Netmon monitoring appliance.",
+  "version": "0.1.6",
+  "websiteUrl": "https://netmon.com/netmon-ai-assistants/",
+  "repository": {
+    "url": "https://github.com/Netmon-Services/netmon-mcp",
+    "source": "github"
+  },
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/Netmon-Services/netmon-mcpd/v0.1.6/icon.png",
+      "mimeType": "image/png",
+      "sizes": ["512x512"]
+    }
+  ],
+  "packages": [
+    {
+      "registryType": "mcpb",
+      "identifier": "https://github.com/Netmon-Services/netmon-mcpd/releases/download/v0.1.6/netmon-mcp-0.1.6.mcpb",
+      "version": "0.1.6",
+      "fileSha256": "__REPLACE_WITH_SHA256_OF_MCPB__",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ],
+  "_meta": {
+    "io.modelcontextprotocol.registry/publisher-provided": {
+      "tool": "netmon-mcp-launch",
+      "version": "1.0.0",
+      "notes": "Local stdio bridge shipped as an MCPB bundle. The bridge forwards JSON-RPC to the Streamable HTTP /mcp endpoint on the operator's own Netmon appliance; there is no vendor-hosted endpoint, so no `remotes` entry is published."
+    }
+  }
+}

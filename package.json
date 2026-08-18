@@ -1,0 +1,12 @@
+{
+  "name": "netmon-mcp-extension",
+  "version": "0.1.6",
+  "private": true,
+  "type": "module",
+  "description": "Claude Desktop extension that bridges stdio MCP to the Netmon Streamable-HTTP /mcp endpoint with TOFU-pinned TLS.",
+  "main": "server/index.js",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "undici": "^7.12.0"
+  }
+}

@@ -1,0 +1,34 @@
+# Build the .mcpb bundle and attach it (plus its sha256) to the GitHub Release
+# whenever a v* tag is pushed. The asset URL must match server.json's
+# packages[0].identifier, and the registry publish step hashes the RELEASED
+# asset — never a local build.
+name: release
+on:
+  push:
+    tags: ["v*"]
+permissions:
+  contents: write
+jobs:
+  mcpb:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build bundle (version from tag)
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          ./build.sh "$VERSION"
+          cd build
+          sha256sum "netmon-mcp-${VERSION}.mcpb" | tee "netmon-mcp-${VERSION}.mcpb.sha256"
+      - name: Attach to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          gh release create "$GITHUB_REF_NAME" \
+            --title "netmon-mcpd $GITHUB_REF_NAME" \
+            --generate-notes \
+            "build/netmon-mcp-${VERSION}.mcpb" \
+            "build/netmon-mcp-${VERSION}.mcpb.sha256"
